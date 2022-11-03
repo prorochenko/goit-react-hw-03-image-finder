@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Searchbar from './Searchbar/Searchbar';
 import Modal from './Modal/Modal';
 import Button from './Button/Button';
 
-export default class App extends Component {
+export default class App extends PureComponent {
   state = {
     contacts: '',
     filter: '',
@@ -24,7 +24,9 @@ export default class App extends Component {
       <div>
         <Searchbar />
         <Button onClick={this.toggleModal} />
-        {showModal && <Modal onClick={this.toggleModal} />}
+        {showModal && (
+          <Modal onClose={this.toggleModal} onClick={this.toggleModal} />
+        )}
       </div>
     );
   }
