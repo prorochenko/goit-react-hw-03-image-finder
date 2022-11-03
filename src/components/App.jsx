@@ -24,7 +24,7 @@ export default class App extends Component {
       <div>
         <Searchbar />
         <Button onClick={this.toggleModal} />
-        {showModal && <Modal />}
+        {showModal && <Modal onClick={this.toggleModal} />}
       </div>
     );
   }
