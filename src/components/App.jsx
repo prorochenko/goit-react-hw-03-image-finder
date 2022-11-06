@@ -27,10 +27,12 @@ export default class App extends PureComponent {
       showModal: !showModal,
     }));
   };
+
   handleFormSubmit = pictureName => {
     console.log(pictureName);
     this.setState({ pictureName });
   };
+
   render() {
     const { showModal } = this.state;
 
