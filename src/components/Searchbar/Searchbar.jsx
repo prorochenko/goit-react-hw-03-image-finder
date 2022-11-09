@@ -18,6 +18,7 @@ export default class Searchbar extends PureComponent {
       toast.error('Please, enter picture name');
       return;
     }
+
     this.props.onSubmit(this.state.pictureName);
     this.setState({ pictureName: '' });
   };
