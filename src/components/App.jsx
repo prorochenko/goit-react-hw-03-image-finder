@@ -5,7 +5,6 @@ import Searchbar from './Searchbar/Searchbar';
 import Modal from './Modal/Modal';
 import Button from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
-// import PictureFounfFail from './Loader/Loader';
 
 export default class App extends PureComponent {
   state = {
@@ -35,7 +34,7 @@ export default class App extends PureComponent {
 
   render() {
     const { showModal } = this.state;
-
+    const { picture, error, status } = this.state;
     return (
       <div>
         <ToastContainer autoClose={3000} />
@@ -44,7 +43,7 @@ export default class App extends PureComponent {
         {showModal && (
           <Modal onClose={this.toggleModal} onClick={this.toggleModal} />
         )}
-        <ImageGallery pictureName={this.state.pictureName} />
+        <ImageGallery pictureName={this.state.pictureName} page={1} />
       </div>
     );
   }

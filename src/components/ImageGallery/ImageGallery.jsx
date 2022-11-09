@@ -1,36 +1,60 @@
 import React, { PureComponent } from 'react';
 import PictureFounfFail from './ImageError';
-import FetchPhoto from '../../api/fetch';
+import * as API from '../../Services/images-fetch';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import LoadingComponent from '../Loader/Loader';
 
 export default class ImageGallery extends PureComponent {
   state = {
+    // searchWord: '',
     picture: null,
     error: null,
     status: 'idle',
+    page: 1,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
+    const { page } = this.state;
+
     if (prevProps.pictureName !== this.props.pictureName) {
-      this.setState({ status: 'pending' });
-      fetch(
-        `https://pixabay.com/api/?key=30395749-07b69c31ba3bc7894f96bd68a&q=${this.props.pictureName}&image_type=photo`
-      )
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
+      try {
+        this.setState({ status: 'pending' });
+        const images = await API.FetchPhoto(this.props.pictureName, page);
+        if (images.length === 0) {
           return Promise.reject(
             new Error(
               `Sorry, we didn't find images with name "${this.props.pictureName}"`
             )
           );
-        })
-
-        .then(picture => this.setState({ picture, status: 'resolved' }))
-        .catch(error => this.setState({ error, status: 'rejected' }));
+        } else {
+          this.setState({
+            imeages: this.props.pictureName,
+            status: 'resolved',
+          });
+        }
+      } catch (error) {
+        this.setState({ error, status: 'rejected' });
+      }
     }
   }
+
+  //     fetch(
+  //       `https://pixabay.com/api/?key=30395749-07b69c31ba3bc7894f96bd68a&q=${this.props.pictureName}&image_type=photo`  //     )
+  //       .then(res => {
+  //         if (res.ok) {
+  //           return res.json();
+  //         }
+  //         return Promise.reject(
+  //           new Error(
+  //             `Sorry, we didn't find images with name "${this.props.pictureName}"`
+  //           )
+  //         );
+  //       })
+
+  //       .then(picture => this.setState({ picture, status: 'resolved' }))
+  //       .catch(error => this.setState({ error, status: 'rejected' }));
+  //   }
+  // }
 
   render() {
     const { picture, error, status } = this.state;
@@ -40,7 +64,11 @@ export default class ImageGallery extends PureComponent {
     }
 
     if (status === 'pending') {
-      return <div>loading..</div>;
+      return (
+        <div>
+          <LoadingComponent />
+        </div>
+      );
     }
 
     if (status === 'rejected') {
