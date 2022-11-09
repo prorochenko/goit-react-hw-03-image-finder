@@ -27,11 +27,12 @@ export default class Searchbar extends PureComponent {
     return (
       <form className={css.Searchbar} onSubmit={this.handleSubmit}>
         <input
-          className={css.SearchForm__input}
+          className={css.input__box}
           type="text"
           name="pictureName"
           value={this.state.pictureName}
           onChange={this.handleNameChange}
+          placeholder={'Enter Image Name'}
         />
         <button className={css.SearchForm__button} type="submit">
           Search

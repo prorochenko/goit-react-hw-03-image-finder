@@ -2,6 +2,7 @@
 // import PictureFounfFail from './ImageError';
 // import * as API from '../../Services/images-fetch';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import css from './ImageGallery.module.scss';
 // import LoadingComponent from '../Loader/Loader';
 
 // export default class ImageGallery extends PureComponent {
@@ -66,7 +67,7 @@ const ImageGallery = ({ images }) => {
     />
   ));
 
-  return <ul>{elements}</ul>;
+  return <ul className={css.list}>{elements}</ul>;
 };
 export default ImageGallery;
 

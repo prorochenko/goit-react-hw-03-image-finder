@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import React, { Component } from 'react';
 
 import css from './Modal.module.scss';
-import Button from '../Button/Button';
+import { ButtonClose } from '../Button/Button';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -28,10 +28,13 @@ export default class Modal extends Component {
   };
 
   render() {
+    const { children } = this.props;
+
     return createPortal(
       <div className={css.Modal__backdrop} onClick={this.handleBackdropClick}>
         <div className={css.Modal__content}>hey</div>
-        <Button onClick={this.props.onClose} />
+        {children}
+        <ButtonClose onClick={this.props.onClose} />
       </div>,
       modalRoot
     );

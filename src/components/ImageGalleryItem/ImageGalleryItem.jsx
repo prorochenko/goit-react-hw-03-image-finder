@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import css from './ImageGalleryItem.module.scss';
 import Modal from '../Modal/Modal';
 // import css from './ImageGalleryItem/ImageGalleryItem.module.css';
 
@@ -25,8 +26,13 @@ class ImageGalleryItem extends Component {
     const { id, webformatURL, largeImageURL, tags } = this.props;
     return (
       <>
-        <li key={id}>
-          <img src={webformatURL} alt={tags} onClick={this.toggleModal} />
+        <li key={id} className={css.item}>
+          <img
+            className={css.img}
+            src={webformatURL}
+            alt={tags}
+            onClick={this.toggleModal}
+          />
         </li>
         {this.state.showModal && (
           <Modal onClose={this.toggleModal}>

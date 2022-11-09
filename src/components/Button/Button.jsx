@@ -1,9 +1,18 @@
-const Button = ({ onClick }) => {
+import { AiOutlineClose } from 'react-icons/ai';
+import css from './Button.module.scss';
+
+export const Button = ({ onClick }) => {
   return (
-    <button type="button" onClick={onClick}>
-      Load more
+    <button type="button" onClick={onClick} className={css.Button}>
+      Load More
     </button>
   );
 };
 
-export default Button;
+export const ButtonClose = ({ onClick }) => {
+  return (
+    <button type="button" onClick={onClick} className={css.Btnclose}>
+      <AiOutlineClose size={25} />
+    </button>
+  );
+};

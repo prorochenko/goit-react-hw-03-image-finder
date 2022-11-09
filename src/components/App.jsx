@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Searchbar from './Searchbar/Searchbar';
 import Modal from './Modal/Modal';
-import Button from './Button/Button';
+import { Button } from './Button/Button';
 import ImageGallery from './ImageGallery/ImageGallery';
 import * as API from '../Services/images-fetch';
 import LoadingComponent from './Loader/Loader';
@@ -40,7 +40,7 @@ export default class App extends PureComponent {
         if (images.length === 0) {
           return Promise.reject(
             new Error(`Sorry, we didn't find images with name "${pictureName}"`)
-          );
+          ).catch(error => this.setState({ error, status: 'rejected' }));
         } else {
           this.setState(prevState => ({
             images: [...prevState.images, ...images],
@@ -48,10 +48,8 @@ export default class App extends PureComponent {
           }));
           console.log(images);
         }
-      } catch (error) {
-        this.setState({ error, status: 'rejected' });
       } finally {
-        console.log('gety');
+        this.setState({ status: 'idle' });
       }
     }
   }
@@ -104,7 +102,11 @@ export default class App extends PureComponent {
 
         <Searchbar onSubmit={this.handleFormSubmit} />
 
-        {status === 'idle' ? <div>Enter picture Name</div> : ''}
+        {status === 'idle' && images.length === 0 ? (
+          <div>Enter picture Name</div>
+        ) : (
+          ''
+        )}
         {status === 'pending' ? (
           <div>
             <LoadingComponent />
