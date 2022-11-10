@@ -6,7 +6,7 @@
   background-color: #f9a826;
   border-radius: 3px;
   overflow: hidden;
-  height: 50px;
+  height: 55px;
 }
 
 .SearchForm__button {
@@ -59,6 +59,8 @@
   border: none;
   border-bottom: 1px solid #adadad;
   padding: 5px;
+  outline: none;
+  border-radius: 5px;
 }
 
 .input__box::placeholder {
