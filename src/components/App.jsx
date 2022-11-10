@@ -8,28 +8,18 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import * as API from '../Services/images-fetch';
 import LoadingComponent from './Loader/Loader';
 import PictureFoundFail from './ImageGallery/ImageError';
-// import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
+import css from '../Styles/main.module.scss';
 
 export default class App extends PureComponent {
   state = {
-    // pictures: null,
     images: [],
-
     showModal: false,
-    // loading: false,
     pictureName: '',
-    // picture: null,
     error: null,
     status: 'idle',
     page: 1,
   };
 
-  // componentDidMount() {
-  //   this.setState({ loading: true });
-  //   fetch('https://pixabay.com/api/?key=30395749-07b69c31ba3bc7894f96bd68a')
-  //     .then(res => res.json())
-  //     .then(pictures => this.setState({ pictures }));
-  // }
   async componentDidUpdate(prevProps, prevState) {
     const { page, pictureName } = this.state;
 
@@ -73,30 +63,6 @@ export default class App extends PureComponent {
   render() {
     const { showModal, error, status, images } = this.state;
 
-    // if (status === 'idle') {
-    //   return <div>Enter picture Name</div>;
-    // }
-
-    // if (status === 'pending') {
-    //   return (
-    //     <div>
-    //       <LoadingComponent />
-    //     </div>
-    //   );
-    // }
-
-    // if (status === 'rejected') {
-    //   return (
-    //     <div>
-    //       <PictureFounfFail message={error.message} />
-    //     </div>
-    //   );
-    // }
-
-    // if (status === 'resolved') {
-    //   return <ImageGalleryItem picture={picture} />;
-    // }
-
     return (
       <div>
         <ToastContainer autoClose={3000} />
@@ -104,7 +70,9 @@ export default class App extends PureComponent {
         <Searchbar onSubmit={this.handleFormSubmit} />
 
         {status === 'idle' && images.length === 0 ? (
-          <div>Enter picture Name</div>
+          <div className={css.text}>
+            Hello! &#x270C; Please, enter an image name &#x1F446;
+          </div>
         ) : (
           ''
         )}
