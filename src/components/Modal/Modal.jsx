@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import css from './Modal.module.scss';
 import { ButtonClose } from '../Button/Button';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -40,3 +41,8 @@ export default class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

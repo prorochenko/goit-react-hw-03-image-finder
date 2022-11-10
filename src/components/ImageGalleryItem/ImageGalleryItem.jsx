@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import css from './ImageGalleryItem.module.scss';
 import Modal from '../Modal/Modal';
+import PropTypes from 'prop-types';
+
 // import css from './ImageGalleryItem/ImageGalleryItem.module.css';
 
 // export default function ImageGalleryItem({ picture: { hits } }) {
@@ -43,5 +45,11 @@ class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  tags: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+};
 
 export default ImageGalleryItem;

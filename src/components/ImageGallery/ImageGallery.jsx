@@ -3,6 +3,8 @@
 // import * as API from '../../Services/images-fetch';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.scss';
+import PropTypes from 'prop-types';
+
 // import LoadingComponent from '../Loader/Loader';
 
 // export default class ImageGallery extends PureComponent {
@@ -114,3 +116,14 @@ export default ImageGallery;
 //     )}
 //   </div>
 // );
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
+};

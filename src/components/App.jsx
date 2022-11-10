@@ -46,7 +46,6 @@ export default class App extends PureComponent {
             images: [...prevState.images, ...images],
             status: 'resolved',
           }));
-          console.log(images);
         }
       } finally {
         this.setState({ status: 'idle' });
@@ -61,11 +60,13 @@ export default class App extends PureComponent {
   };
 
   loadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+      status: 'pending',
+    }));
   };
 
   handleFormSubmit = pictureName => {
-    console.log(pictureName);
     this.setState({ pictureName, images: [], page: 1 });
   };
 
@@ -107,13 +108,6 @@ export default class App extends PureComponent {
         ) : (
           ''
         )}
-        {status === 'pending' ? (
-          <div>
-            <LoadingComponent />
-          </div>
-        ) : (
-          ''
-        )}
         {status === 'rejected' ? (
           <div>
             <PictureFoundFail message={error.message} />
@@ -121,17 +115,12 @@ export default class App extends PureComponent {
         ) : (
           ''
         )}
-        {/* {status === 'resolved' ? <ImageGallery images={images} /> : ''} */}
         <ImageGallery images={images} />
+        {status === 'pending' && <LoadingComponent />}
         {images.length > 0 && <Button onClick={this.loadMore} />}
-
         {showModal && (
           <Modal onClose={this.toggleModal} onClick={this.toggleModal} />
         )}
-        {/* <ImageGallery
-          images={images}
-          pictureName={this.state.pictureName} page={1}
-        />  */}
       </div>
     );
   }

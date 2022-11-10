@@ -1,5 +1,6 @@
 import { AiOutlineClose } from 'react-icons/ai';
 import css from './Button.module.scss';
+import PropTypes from 'prop-types';
 
 export const Button = ({ onClick }) => {
   return (
@@ -15,4 +16,11 @@ export const ButtonClose = ({ onClick }) => {
       <AiOutlineClose size={25} />
     </button>
   );
+};
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
+ButtonClose.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };

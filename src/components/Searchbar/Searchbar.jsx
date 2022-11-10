@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import css from './Searchbar.module.scss';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 export default class Searchbar extends PureComponent {
   state = {
@@ -41,3 +42,7 @@ export default class Searchbar extends PureComponent {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
